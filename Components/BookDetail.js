@@ -2,7 +2,7 @@ const BookDetail = (list) =>
 {
     var html;
 
-    if (list['coverImage'] === '')
+    if (list['coverImage'] === '') // If the book has no cover image
     {
         html = `<li id="bookDetail" class="mb-2 mx-2 last:mb-0 p-3 text-black last:border-b-0 border-b border-indigo-700 cursor-pointer">
                     <p class="bookDetail__item mx-4">Author: ${list['author']}</p>
@@ -11,7 +11,7 @@ const BookDetail = (list) =>
                     <p class="bookDetail__item mx-4">Release: ${list['releaseDate']}</p>
                 </li>`;
     }
-    else
+    else // If the book has a cover image
     {
         src = list['coverImage']
         html = `<li id="bookDetail" class="mb-2 mx-2 last:mb-0 p-3 text-black last:border-b-0 border-b border-indigo-700 cursor-pointer">

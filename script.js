@@ -1,16 +1,16 @@
-let bookList = [];
+let booksList = [];
 let bookArray = {};
 let filteredList = {};
 
-getAll().then((apiBooks) => (bookList = apiBooks));
+getAll().then((apiBooks) => (booksList = apiBooks));
 document.body.addEventListener('mouseover', (e) => renderBookDetails(e.target, filteredList));  // Create eventlistener for the whole body
 
 const searchField = document.getElementById('searchField');
 searchField.addEventListener('keyup', (e) => 
     renderBookList(
-        bookList.filter(({title, author}) => {
+        booksList.filter(({title, author}) => {
             const searchTerm = e.target.value.toLowerCase();
-            if (searchTerm !='') return title.toLowerCase().indexOf(searchTerm) >= 0 || author.toLowerCase().indexOf(searchTerm) >= 0;
+            return title.toLowerCase().indexOf(searchTerm) >= 0 || author.toLowerCase().indexOf(searchTerm) >= 0;
         })
     )
 );
@@ -23,12 +23,12 @@ async function renderBookDetails(element, filteredList)
 
         element.appendChild(detailList); // Append the li element to the list item
 
-        for (i = 0; i < bookList.length; i++)
+        // Function to get the correct id of the book based on the title
+        for (i = 0; i < booksList.length; i++)
         {
-            // Function to get the correct id of the book based on the title
-            if (bookList[i]['title'] === filteredList[index]['title'])  
+            if (booksList[i]['title'] === filteredList[index]['title'])  
             {
-                await getById(i + 1).then((apiBooks) => bookArray = apiBooks);
+                await getById(i + 1).then((apiBooks) => bookArray = apiBooks); // Get the book from the api based on the id
                 detailList.innerHTML = BookDetail(bookArray); // Set the html of the detailList
             } 
         }   
@@ -40,12 +40,12 @@ async function renderBookDetails(element, filteredList)
     };
 }
 
-function renderBookList(bookList) 
+function renderBookList(booksList) 
 {
-    filteredList = bookList;
+    filteredList = booksList;
     const root = document.getElementById('root');
-    const existingBookList = document.querySelector('.book-list');
+    const existingbookList = document.querySelector('.book-list');
     
-    if (existingBookList) root.removeChild(existingBookList);
-    if (bookList.length > 0) root.insertAdjacentHTML('beforeend', BookList(bookList));
+    if (existingbookList) root.removeChild(existingbookList);
+    if (booksList.length > 0 && searchField.value) root.insertAdjacentHTML('beforeend', BookList(booksList));
 }

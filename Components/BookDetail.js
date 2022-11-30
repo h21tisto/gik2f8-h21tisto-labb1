@@ -4,7 +4,7 @@ const BookDetail = (list) =>
 
     if (list['coverImage'] === '') // If the book has no cover image
     {
-        html = `<li id="bookDetail" class="mb-2 mx-2 last:mb-0 p-3 text-black last:border-b-0 border-b border-indigo-700 cursor-pointer">
+        html = `<li id="bookDetail" class="mb-2 last:mb-0 px-8 mt-6 p-3 text-black last:border-b-0 border-t border-indigo-700 cursor-pointer">
                     <p class="bookDetail__item mx-4 pt-4">Author: ${list['author']}</p>
                     <p class="bookDetail__item mx-4">Title: ${list['title']}</p>
                     <p class="bookDetail__item mx-4">Pages: ${list['pages']}</p>
@@ -14,7 +14,7 @@ const BookDetail = (list) =>
     else // If the book has a cover image
     {
         src = list['coverImage']
-        html = `<li id="bookDetail" class="mb-2 mx-2 last:mb-0 p-3 text-black last:border-b-0 border-b border-indigo-700 cursor-pointer">
+        html = `<li id="bookDetail" class="mb-2 last:mb-0 px-8 pt-9 mt-6 p-3 text-black last:border-b-0 border-t border-indigo-700 cursor-pointer">
                     <div class="flex mx-auto space-x-24">
                         <div class="inline-flex flex-col justify-center align-middle">
                             <p class="bookDetail__item mx-4">Author: ${list['author']}</p>
@@ -23,7 +23,7 @@ const BookDetail = (list) =>
                             <p class="bookDetail__item mx-4">Release: ${list['releaseDate']}</p>
                         </div>
                         <img class="inline-flex object-scale-down h-48 w-auto" 
-                        src="${src}">
+                        src="${list['coverImage']}">
                     </div>
                 </li>`
     }
